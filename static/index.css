@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(72, 122, 196);
+}
+
+.top-bar {
+  display: grid;
+  place-items: center;
+}
+
+.top-bar ul{
+  margin-top: 38px;
+  margin-left: 0px;
+}
+
+.top-bar ul li{
+  display: inline-block;
+}
+
+.top-bar ul li a{
+  text-decoration: none;
+  padding: 5px 10px;
+  color: white;
+  font-size: 30px;
+}
+
+.top-bar ul li a:hover{
+  text-decoration: none;
+  color: white;
+  background-color: rgba(240, 248, 255, 0.303);
+  font-size: 30px;
+}
+
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  width: 50%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th.small {
+  width: 20%;
+  border-collapse: collapse;
+}
+
+a {
+  text-decoration: none;
+  color:black
+}
+
+div.record {
+  position: absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+  background-color: white;
+	border-radius:10px;
+  padding:1vw 2vw;
+  opacity: 0.7;
+}
+
+.sidenav {
+  display: none;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+span.hidden {
+  font-size:30px;
+  cursor:pointer;
+  visibility:hidden;
+  position: absolute;
+  top:10px;
+}
+
+div.box a {
+  font-size:5vw;
+  display: grid;
+  place-items: center;
+}
+
+@media only screen and (max-width:641px) {
+  nav.top-bar {
+    visibility: hidden;
+  }
+
+  span.hidden {
+    visibility: visible;
+  }
+}
