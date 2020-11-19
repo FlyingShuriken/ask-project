@@ -7,16 +7,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/check')
+@app.route('/check',methods= ["GET","POST"])
 def check():
     return render_template('check.html')
 
-@app.route('/search')
+@app.route('/search',methods= ["GET","POST"])
 def search():
     result = []
     total = 0
-    name = str(request.args.get("name"))
-    classes = str(request.args.get("class"))
+    name = str(request.form.get("name"))
+    classes = str(request.form.get("class"))
     with open(f'csv/{classes[0]}.csv','r') as database:
         db = csv.DictReader(database)
         for row in db:
@@ -42,11 +42,11 @@ def search():
         result.append({'datetime':'','name':'','class':'','marks':total,'reason':'TIDAK ADA TINDAKAN'})
     return render_template('search.html',results=result)
 
-@app.route('/all')
+@app.route('/all',methods= ["GET","POST"])
 def all():
     result = []
-    form = str(request.args.get("form","1"))
-    classes = str(request.args.get("class"))
+    form = str(request.form.get("form","1"))
+    classes = str(request.form.get("class"))
     with open(f'csv/{form}.csv','r') as database:
         db = csv.DictReader(database)
         t = f"{form}{classes.upper()}"
@@ -55,14 +55,14 @@ def all():
                 result.append(row)
     return render_template('all.html',results=result)
 
-@app.route('/record')
+@app.route('/record',methods= ["GET","POST"])
 def record():
-    date = request.args.get("date")
-    time = request.args.get("time")
-    name = str(request.args.get("name"))
-    classes = str(request.args.get("class",''))
-    marks = request.args.get("marks")
-    reason = str(request.args.get("reason"))
+    date = request.form.get("date")
+    time = request.form.get("time")
+    name = str(request.form.get("name"))
+    classes = str(request.form.get("class",''))
+    marks = request.form.get("marks")
+    reason = str(request.form.get("reason"))
     datetime = f"{date} {time}"
     if classes != '':
         with open(f'csv/{classes[0]}.csv','a+',newline='\n') as database:
