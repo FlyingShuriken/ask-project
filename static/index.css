@@ -12,6 +12,7 @@ body {
 .top-bar ul{
   margin-top: 38px;
   margin-left: 0px;
+  padding: 0px 0px;
 }
 
 .top-bar ul li{
@@ -104,10 +105,19 @@ span.hidden {
   top:10px;
 }
 
+div.box {
+  background-color: white;
+  opacity: 0.7;
+  border-radius:10px;
+  width:80vw;
+  position: relative;
+  left:10vw;
+}
+
 div.box a {
   font-size:5vw;
-  display: grid;
   place-items: center;
+  display: grid;
 }
 
 @media only screen and (max-width:641px) {
@@ -117,5 +127,18 @@ div.box a {
 
   span.hidden {
     visibility: visible;
+  }
+
+  div.box a {
+    font-size:10vw;
+  }
+
+  div.box {
+    width:70vw;
+  }
+
+  div.container {
+    position: relative;
+    bottom:20vw;
   }
 }
