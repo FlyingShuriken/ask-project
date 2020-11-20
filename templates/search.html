@@ -47,6 +47,16 @@
                     {% endfor %}
                 </table>
             </div>
+            <br>
+            <br>
+            <h2>or download the file</h2>
+            <h2>(.csv file, can open with excel)</h2>
+            <form action="/search" method="post">
+                <input type="hidden" name="name" value="{{ na }}">
+                <input type="hidden" name="class" value="{{ cl }}">
+                <input type="hidden" name="download" value="True">
+                <button type="submit" name="down">DOWNLOAD</button>
+            </form>
         </div>
     </body>
 </html>

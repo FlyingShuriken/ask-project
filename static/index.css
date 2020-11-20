@@ -53,7 +53,7 @@ a {
   color:black
 }
 
-div.record {
+div.record, div.check-main {
   position: absolute;
 	left:50%;
 	top:50%;

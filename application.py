@@ -1,22 +1,47 @@
 from flask import *
 import csv
+import os
 
 app = Flask(__name__)
 
+def delete():
+    try:
+        arr = os.listdir("./csv/download")
+        for i in arr:
+            os.remove(f"./csv/download/{i}")
+    except:
+        pass
+
+def download(n,c,filename):
+    with open(f'csv/{c[0]}.csv','r') as database:
+        with open(f'csv/download/{filename}.csv','a+',newline='\n')as file:
+            db = csv.DictReader(database)
+            w = csv.writer(file)
+            w.writerow(["datetime","name","class","marks","reason"])
+            for row in db:
+                if row['name'] == n.upper() and row['class'] == c.upper():
+                    w.writerow([row['datetime'],row['name'],row['class'],row['marks'],row['reason']])
+    path = f"csv/download/{filename}.csv"
+    return path
+
 @app.route('/')
 def index():
+    delete()
     return render_template('index.html')
 
 @app.route('/check',methods= ["GET","POST"])
 def check():
+    delete()
     return render_template('check.html')
 
 @app.route('/search',methods= ["GET","POST"])
 def search():
+    delete()
     result = []
     total = 0
-    name = str(request.form.get("name"))
-    classes = str(request.form.get("class"))
+    name = str(request.form.get("name","1"))
+    classes = str(request.form.get("class","1"))
+    down = str(request.form.get("download"))
     with open(f'csv/{classes[0]}.csv','r') as database:
         db = csv.DictReader(database)
         for row in db:
@@ -40,10 +65,16 @@ def search():
     else:
         result.append({'datetime':'','name':'','class':'','marks':'TOTAL:','reason':'TINDAKAN:'})
         result.append({'datetime':'','name':'','class':'','marks':total,'reason':'TIDAK ADA TINDAKAN'})
-    return render_template('search.html',results=result)
+    if down == "True":
+        pro = "name"
+        path = download(n=name,c=classes,filename=pro)
+        return send_file(path, as_attachment=True)
+    else:
+        return render_template('search.html',results=result,na=name,cl=classes)
 
 @app.route('/all',methods= ["GET","POST"])
 def all():
+    delete()
     result = []
     form = str(request.form.get("form","1"))
     classes = str(request.form.get("class"))
@@ -57,6 +88,7 @@ def all():
 
 @app.route('/record',methods= ["GET","POST"])
 def record():
+    delete()
     date = request.form.get("date")
     time = request.form.get("time")
     name = str(request.form.get("name"))
